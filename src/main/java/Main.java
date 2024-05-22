@@ -1,52 +1,51 @@
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.InputStreamReader;
 
 class Main {
   public static void main(String[] args) {
     try {
       Service s = new Service();
-      Scanner scanner = new Scanner(System.in);
+      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-      boolean running = true;
-      while (running) {
+      while (true) {
         System.out.println("Wybierz opcję:");
         System.out.println("1. Dodaj nowego studenta");
-        System.out.println("2. Wyświetl listę studentów");
-        System.out.println("3. Wyjdź");
+        System.out.println("2. Wyświetl wszystkich studentów");
+        System.out.println("0. Wyjdź");
 
-        int option = Integer.parseInt(scanner.nextLine());
+        int choice = Integer.parseInt(reader.readLine());
 
-        switch (option) {
+        switch (choice) {
           case 1:
-
-            System.out.println("Dodawanie nowego studenta:");
             System.out.println("Podaj imię studenta:");
-            String name = scanner.nextLine();
+            String name = reader.readLine();
+            System.out.println("Podaj nazwisko studenta:");
+            String surname = reader.readLine();
             System.out.println("Podaj wiek studenta:");
-            int age = Integer.parseInt(scanner.nextLine());
-            s.addStudent(new Student(name, age));
+            int age = Integer.parseInt(reader.readLine());
+            s.addStudent(new Student(name, surname, age));
+            System.out.println("Nowy student został dodany do bazy danych.");
             break;
           case 2:
-
-            System.out.println("Lista studentów:");
+            System.out.println("Lista wszystkich studentów:");
             var students = s.getStudents();
-            for(Student current : students) {
-              System.out.println(current.ToString());
+            for (Student student : students) {
+              System.out.println(student.ToString());
             }
             break;
-          case 3:
-     
-            System.out.println("Zakończono program.");
-            running = false;
-            break;
+          case 0:
+            System.out.println("Koniec programu.");
+            return;
           default:
-            System.out.println("Niepoprawna opcja. Spróbuj ponownie.");
+            System.out.println("Niepoprawny wybór. Wybierz ponownie.");
+            break;
         }
       }
-
-      scanner.close();
     } catch (IOException e) {
-      e.printStackTrace();
+      System.out.println("I/O ERROR" + e.getMessage());
+    } catch (NumberFormatException e) {
+      System.out.println("INVALID TYPE ERROR");
     }
   }
 }
