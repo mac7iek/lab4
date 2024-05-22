@@ -20,16 +20,32 @@ class Main {
           case 1:
             System.out.println("Podaj imię studenta:");
             String name = reader.readLine();
+            if (!Student.validateName(name)) {
+              System.out.println("Niepoprawne imię.");
+              break;
+            }
             System.out.println("Podaj nazwisko studenta:");
             String surname = reader.readLine();
+            if (!Student.validateSurname(surname)) {
+              System.out.println("Niepoprawne nazwisko.");
+              break;
+            }
             System.out.println("Podaj wiek studenta:");
             int age = Integer.parseInt(reader.readLine());
+            if (!Student.validateAge(age)) {
+              System.out.println("Niepoprawny wiek.");
+              break;
+            }
             System.out.println("Podaj dzień urodzenia studenta:");
             int dayOfBirth = Integer.parseInt(reader.readLine());
             System.out.println("Podaj miesiąc urodzenia studenta:");
             int monthOfBirth = Integer.parseInt(reader.readLine());
             System.out.println("Podaj rok urodzenia studenta:");
             int yearOfBirth = Integer.parseInt(reader.readLine());
+            if (!Student.validateDateOfBirth(dayOfBirth, monthOfBirth, yearOfBirth)) {
+              System.out.println("Niepoprawna data urodzenia.");
+              break;
+            }
             s.addStudent(new Student(name, surname, age, dayOfBirth, monthOfBirth, yearOfBirth));
             System.out.println("Nowy student został dodany do bazy danych.");
             break;
