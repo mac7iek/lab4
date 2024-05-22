@@ -24,7 +24,13 @@ class Main {
             String surname = reader.readLine();
             System.out.println("Podaj wiek studenta:");
             int age = Integer.parseInt(reader.readLine());
-            s.addStudent(new Student(name, surname, age));
+            System.out.println("Podaj dzień urodzenia studenta:");
+            int dayOfBirth = Integer.parseInt(reader.readLine());
+            System.out.println("Podaj miesiąc urodzenia studenta:");
+            int monthOfBirth = Integer.parseInt(reader.readLine());
+            System.out.println("Podaj rok urodzenia studenta:");
+            int yearOfBirth = Integer.parseInt(reader.readLine());
+            s.addStudent(new Student(name, surname, age, dayOfBirth, monthOfBirth, yearOfBirth));
             System.out.println("Nowy student został dodany do bazy danych.");
             break;
           case 2:
@@ -43,7 +49,7 @@ class Main {
         }
       }
     } catch (IOException e) {
-      System.out.println("I/O ERROR" + e.getMessage());
+      System.out.println("I/O ERROR: " + e.getMessage());
     } catch (NumberFormatException e) {
       System.out.println("INVALID TYPE ERROR");
     }
